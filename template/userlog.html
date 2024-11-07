@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PCOS  Detection</title>
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      /* .row{
+        display: flex;
+        padding-left: 2%;
+        padding-right: 2%;
+      }
+      .column{
+        width: 30%;
+        margin: 1%;
+      } */
+      input[type=submit], input[type=file]{
+        width: 50%;
+        border:1px solid #ffffff;
+        color: white;
+        background-color: transparent;
+        padding:14px 0;
+        margin: 8px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      input[type=submit]{
+        border:1px solid #ffffff;
+      }
+      input[type=submit]:hover{
+        background-color: #ffffff;
+        color: black;
+      }
+      h1{
+        color: white;
+      }
+      .imageCoose{
+        width: 50%;
+        margin: auto;
+        padding: 50px;
+        background-color: rgba(0, 0, 0, 0.50);
+        color: white;
+      }
+      .row{
+        background-color: wheat;
+        font-size: 14px;
+        margin: 150px 50px;
+        padding: 50px;
+      }
+      img{
+       width: 100%;
+       margin-bottom: 30px;     }
+      body{
+        background-image: url('static/demo2.jpg');
+        background-size: 100% 100vh;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+      h4{
+        text-align: center;
+      }
+      body{
+        background-image: url("https://images.pexels.com/photos/40568/medical-appointment-doctor-healthcare-40568.jpeg?cs=srgb&dl=pexels-pixabay-40568.jpg&fm=jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100vh;
+        background-attachment: fixed;
+      }
+      nav{
+        background-color: rgb(237, 69, 69) !important;
+        border: none !important;
+      }
+      nav a{
+        color: #ffffff !important;
+
+      }
+      nav li{
+        margin: 0 25px;
+      }
+    </style>
+</head>
+ <body > 
+  <nav class="navbar navbar-inverse" style="padding: 20px;">
+    <div class="container-fluid">
+      <div class="navbar-header">
+     
+  
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="/">PCOS</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav navbar-right">
+          <!-- <li><a href="/">Home</a></li> -->
+          <li><a href="/about">About</a></li>
+          <li><a href="/choose">Test</a></li>
+          <li><a href="/remedy">Remedy</a></li>
+          <li><a href="/pcos">Scan Test</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div class="container">
+      {% if msg %}
+      <div class="alert alert-warning alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Warning!</strong> {{msg}}
+      </div>
+      {% endif %}
+  <!-- <center> -->
+  <h1 style="padding-top: 50px; text-align: center;color: black;">PCOS  Detection</h1>
+  <hr>
+  <div class="imageCoose">
+      <h2>Select Image</h2>
+      <hr>
+        <form action="{{url_for('image')}}" method="POST" style="display: flex;">          
+          <input type="file" id="file" name="filename" required>
+          <input type="submit" value="Analyse">
+        </form>
+    </div>
+
+
+<div class="results">
+    <div class="row">
+    <div class="col-lg-4">
+      <centre><h4>Selected Image</h4></centre>
+      <hr>
+      {% if (ImageDisplay) %}
+      <img src="{{ImageDisplay}}">
+      {% endif %}
+    </div>
+
+    <div class="col-lg-4">
+     <centre> <h4>Gray</h4></centre>
+      <hr>
+      {% if (ImageDisplay1) %}
+        <img src="{{ImageDisplay1}}">
+      {% endif %}
+    </div>
+
+    <div class="col-lg-4">
+      <centre><h4>Edge Detection</h4></centre>
+      <hr>
+      {% if (ImageDisplay2) %}
+        <img src="{{ImageDisplay2}}">
+      
+      {% endif %}
+    </div>
+
+    <div class="col-lg-4">
+      <centre><h4>Segmentation</h4></centre>
+      <hr>
+      {% if (ImageDisplay3) %}
+        <img src="{{ImageDisplay3}}">
+      
+      {% endif %}
+    </div>
+      <div class="col-lg-4">
+        <centre><h4>Threshold Detection</h4></centre>
+        <hr>
+        {% if (ImageDisplay3) %}
+     
+          <img src="{{ImageDisplay3}}">
+       
+        
+        {% endif %}
+      </div>
+    <div class="col-lg-4">
+     <centre><h4>Answer</h4></centre> 
+      <hr>
+      {% if (status) %}
+
+              <p><b>Status: </b>{{status}}</p>
+              <p><b>Accuracy:</b>{{accuracy}}</p>
+              <!-- <p><b>Cell Count:</b>{{cell_count}}</p> -->
+
+         
+          {% endif %}
+        </div>
+    </div>
+  </div>
+</div>
+  </body>
+<!-- </center> -->
+</body>
+</html>
